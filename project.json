@@ -1,6 +1,10 @@
 {
-  "name": "UiPath_REFrameWork",
-  "description": "UiPath_REFrameWork Template",
+  "name": "Agenda Builder",
+  "description": "This app will:
+1. open and read emails
+2. check for the quality of the data
+3. check if the the process is posible
+4. write email with the result",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.6.0]",
