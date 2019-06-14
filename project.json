@@ -1,12 +1,10 @@
 {
   "name": "Agenda Builder",
-  "description": "This app will:
-1. open and read emails
-2. check for the quality of the data
-3. check if the the process is posible
-4. write email with the result",
+  "description": "This app will:\r\n1. open and read emails\r\n2. check for the quality of the data\r\n3. check if the the process is posible\r\n4. write email with the result",
   "main": "Main.xaml",
   "dependencies": {
+    "CredentialManagement": "[1.0.2]",
+    "UiPath.Credentials.Activities": "[1.1.6479.13204]",
     "UiPath.Excel.Activities": "[2.6.0]",
     "UiPath.Mail.Activities": "[1.5.0]",
     "UiPath.System.Activities": "[19.2.0]",
