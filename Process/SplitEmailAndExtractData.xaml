@@ -57,7 +57,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SplitEmailAndExtractData" sap:VirtualizedContainerService.HintSize="486,1691" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SplitEmailAndExtractData" sap:VirtualizedContainerService.HintSize="438,1610" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="StringArray" />
       <Variable x:TypeArguments="x:String" Name="From" />
@@ -67,13 +67,14 @@
       <Variable x:TypeArguments="x:String" Name="Body" />
       <Variable x:TypeArguments="s:String[]" Name="FormArray" />
       <Variable x:TypeArguments="x:String" Name="Conference" />
+      <Variable x:TypeArguments="s:String[]" Name="bodyArray" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Split the transaction to array" sap:VirtualizedContainerService.HintSize="464,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="Split the transaction to array" sap:VirtualizedContainerService.HintSize="416,60" sap2010:WorkflowViewState.IdRef="Assign_12">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[StringArray]</OutArgument>
       </Assign.To>
@@ -81,7 +82,7 @@
         <InArgument x:TypeArguments="s:String[]">[in_TransactionItem.Split({vbLf},StringSplitOptions.RemoveEmptyEntries)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Sequence DisplayName="Get email details" sap:VirtualizedContainerService.HintSize="464,384" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Get email details" sap:VirtualizedContainerService.HintSize="416,384" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -112,40 +113,35 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <Assign sap:VirtualizedContainerService.HintSize="464,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,262" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="264,184" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Split the transaction to array" sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+            <Assign.To>
+              <OutArgument x:TypeArguments="s:String[]">[bodyArray]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="s:String[]">[Split(in_TransactionItem.tostring,“Conference:”)]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <Assign DisplayName="Split the transaction to array" sap:VirtualizedContainerService.HintSize="416,60" sap2010:WorkflowViewState.IdRef="Assign_19">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[Body]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:Int32">5</InArgument>
+        <InArgument x:TypeArguments="x:String">[Split(in_TransactionItem.tostring,“Conference:”)(2)]</InArgument>
       </Assign.Value>
     </Assign>
-    <While DisplayName="Comparing Paragraph While" sap:VirtualizedContainerService.HintSize="464,442" sap2010:WorkflowViewState.IdRef="While_1" Condition="[counter &lt; StringArray.length]">
-      <Sequence sap:VirtualizedContainerService.HintSize="264,284" sap2010:WorkflowViewState.IdRef="Sequence_3">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_8">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[Body]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String">[Body+ "|" + StringArray(counter)]</InArgument>
-          </Assign.Value>
-        </Assign>
-        <Assign sap:VirtualizedContainerService.HintSize="242,60" sap2010:WorkflowViewState.IdRef="Assign_9">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:Int32">[counter + 1]</InArgument>
-          </Assign.Value>
-        </Assign>
-      </Sequence>
-    </While>
-    <Assign sap:VirtualizedContainerService.HintSize="464,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,59" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[body]" TopMost="True" />
+    <Assign sap:VirtualizedContainerService.HintSize="416,60" sap2010:WorkflowViewState.IdRef="Assign_10">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[FormArray]</OutArgument>
       </Assign.To>
@@ -153,7 +149,7 @@
         <InArgument x:TypeArguments="s:String[]">[Body.Split("|"c)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="464,262" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="416,262" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="264,184" sap2010:WorkflowViewState.IdRef="Sequence_6">
           <sap:WorkflowViewStateService.ViewState>
@@ -172,6 +168,6 @@
         </Sequence>
       </ui:CommentOut.Body>
     </ui:CommentOut>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="464,59" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[FormArray(0) + &quot;***&quot;+ FormArray(1) + &quot;***&quot;+FormArray(2) + &quot;***&quot;+ FormArray(3) + &quot;***&quot;]" TopMost="True" />
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="416,59" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[FormArray(0) + &quot;***&quot;+ FormArray(1) + &quot;***&quot;+FormArray(2) + &quot;***&quot;+ FormArray(3) + &quot;***&quot;]" TopMost="True" />
   </Sequence>
 </Activity>
